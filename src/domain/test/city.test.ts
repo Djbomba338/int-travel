@@ -1,6 +1,10 @@
 import { describe, beforeEach, test, expect } from "vitest";
 import City, { calculateDurationDays } from "../city.ts";
-
+import Accommodation from "../accommodation.ts";
+let accommodation: Accommodation;
+let name = "gero";
+let cost = "70";
+accommodation = new Accommodation(name, cost);
 function createCity(): City {
   return new City(
     "TestCity",
@@ -8,6 +12,7 @@ function createCity(): City {
     new Date("2023-05-01"),
     new Date("2023-05-04"),
     "Notas",
+    accommodation,
   );
 }
 
@@ -155,11 +160,14 @@ describe("Duration in days", () => {
   });
 
   test("should calculate duration as 1 day if dateFrom equals dateTo", () => {
+   
     const singleDayCity = new City(
       "SingleDayCity",
       "TestCountry",
       new Date("2023-05-01"),
       new Date("2023-05-01"),
+      "Notas",
+      accommodation,
     );
     expect(singleDayCity.getDurationDays()).toBe(1);
   });

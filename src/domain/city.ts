@@ -1,9 +1,12 @@
+import type Accommodation from "./accommodation";
+
 class City {
   #cityName!: string;
   #country!: string;
   #dateFrom!: Date;
   #dateTo!: Date;
   #notes: string = "";
+  #acomodation! : Accommodation;
 
   constructor(
     cityName: unknown,
@@ -11,6 +14,7 @@ class City {
     dateFrom: unknown,
     dateTo: unknown,
     notes: unknown = "",
+    acomodation: Accommodation,
   ) {
     this.setName(cityName);
     this.setCountry(country);
@@ -18,6 +22,7 @@ class City {
     this.setDateFrom(dateFrom);
     this.setDateTo(dateTo);
     this.setNotes(notes);
+    this.setAcomodation(acomodation);
   }
 
   getCountry(): string {
@@ -93,6 +98,12 @@ class City {
   getDurationDays(): number {
     return calculateDurationDays(this.#dateFrom, this.#dateTo);
   }
+  getAcomodation(): Accommodation {
+    return this.#acomodation;
+  }
+  setAcomodation(acomodation: Accommodation): void{
+    this.#acomodation = acomodation;
+  }
 
   validateDatesOrder(
     dateFrom: unknown = this.#dateFrom,
@@ -112,6 +123,7 @@ class City {
     if (dateToParsed < dateFromParsed)
       throw new Error("dateTo cannot be earlier than dateFrom");
   }
+
 
   private parseDate(value: unknown): Date {
     if (
